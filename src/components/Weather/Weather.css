@@ -1,0 +1,164 @@
+.weather_container {
+    margin-top: 15vh;
+        width: 100vw;
+        height: 85vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url('../../assets/pexels-andre-furtado-43594-1162251.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        transition: all 0.5s ease;
+}
+
+.search_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.fa_search {
+    font-size: 3rem;
+    cursor: pointer;
+    color: #333;
+}
+
+.weather_content {
+    width: 80%;
+        height: 90%;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 2rem;
+        padding-top: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.5s ease;
+}
+
+.weather_navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #0077ff;
+    color: #fff;
+}
+
+.weather_search {
+    display: flex;
+    align-items: center;
+}
+
+.weather_search input {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+}
+
+.weather_search .fa_search {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.location_geotagging {
+    display: flex;
+    align-items: center;
+}
+
+.fa_location {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.weather_info {
+    display: flex;
+    padding: 1rem;
+}
+
+.left_side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.last_5_days {
+    flex: 1;
+}
+
+.last_5_days p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.days {
+    display: flex;
+    justify-content: space-between;
+}
+
+.day {
+    text-align: center;
+}
+
+.day p {
+    margin: 0.5rem 0;
+}
+
+.day svg {
+    font-size: 2rem;
+}
+
+.map {
+    margin-top: 1rem;
+}
+
+.map img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.map p {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.right_side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.city_name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.weather_details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.attribute {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.attribute svg {
+    font-size: 2rem;
+}
