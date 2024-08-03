@@ -1,21 +1,39 @@
 import React, { useState } from 'react';
 import './Weather.css';
+import Rain from '../../assets/rain.jpg';
+// import Rain1 from '../../assets/rain1.jpg';
+import Sunny from '../../assets/sunny.jpg';
+import Thunderstorm from '../../assets/thunderstorm.jpg';
+import Cloudy from '../../assets/cloudy.jpg';
+import Haze from '../../assets/haze.jpg';
+import Cold from '../../assets/cold.jpg';
+
 import { BiCloud, BiSearch, BiSun } from 'react-icons/bi';
-import { WiHumidity, WiRain, WiWindy } from 'react-icons/wi';
-import { TbTemperature } from 'react-icons/tb';
+import { WiHumidity, WiRain, WiThunderstorm, WiWindy } from 'react-icons/wi';
+import { TbMist, TbTemperature } from 'react-icons/tb';
 import Map from '../../assets/OIP.jpeg';
 import { LuHaze } from 'react-icons/lu';
 import { CiLocationOn } from 'react-icons/ci';
+import { BsSnow } from 'react-icons/bs';
+import { GiFog } from 'react-icons/gi';
 
 function Weather() {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [searchClicked, setSearchClicked] = useState(false); // New state for search button click
+  const [searchClicked, setSearchClicked] = useState(false);
+  const [error, setError] = useState(null); // New state for error handling
   const apikey = "65f7b612e3b7902c807bca207f229519";
 
   const fetchWeather = async () => {
+    if (!city) {
+      setError("Error: No city name provided");
+      return;
+    }
+
     setLoading(true);
+    setError(null);
+
     try {
       const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apikey}`);
       if (response.ok) {
@@ -23,11 +41,12 @@ function Weather() {
         setWeather(data);
         console.log('Weather Data:', data);
       } else {
-        console.error('City not found');
+        setError("Error: City not found");
         setWeather(null);
       }
     } catch (error) {
       console.error('Error fetching weather data:', error);
+      setError("Error: Unable to fetch weather data");
       setWeather(null);
     }
     setLoading(false);
@@ -35,7 +54,7 @@ function Weather() {
 
   const getCurrentWeatherData = () => {
     if (!weather) return {};
-    const { list, city } = weather;
+    const { list } = weather;
     return {
       temperature: list[0].main.temp.toFixed(2),
       windspeed: list[0].wind.speed,
@@ -64,16 +83,33 @@ function Weather() {
       case 'Clouds': return BiCloud;
       case 'Rain': return WiRain;
       case 'Haze': return LuHaze;
+      case 'Thunderstorm': return WiThunderstorm;
+      case 'Snow': return BsSnow;
+      case 'Mist': return TbMist;
+      case 'Fog': return GiFog;
       default: return BiCloud;
+    }
+  };
+
+  const getBackgroundImage = (weatherType) => {
+    switch (weatherType) {
+      case 'Clear': return Sunny;
+      case 'Clouds': return Cloudy;
+      case 'Rain': return Rain;
+      case 'Thunderstorm': return Thunderstorm;
+      case 'Snow': return Cold;
+      case 'Haze': return Haze;
+      default: return Cloudy;
     }
   };
 
   const currentWeatherData = getCurrentWeatherData();
   const fiveDayForecast = getFiveDayForecast();
   const WeatherIcon = getWeatherIcon(currentWeatherData.weather);
+  const image = getBackgroundImage(currentWeatherData.weather)
 
   return (
-    <div className='weather_container'>
+    <div className='weather_container' style={{ backgroundImage: `url(${image})` }}>
       {!searchClicked ? (
         <div className='search_button'>
           <BiSearch className='fa_search' onClick={() => setSearchClicked(true)} />
@@ -99,7 +135,9 @@ function Weather() {
 
           {loading && <p className='loading'>Loading...</p>}
 
-          {weather && !loading && (
+          {error && <div className='error'>{error}</div>} {/* Error message div */}
+
+          {weather && !loading && !error && (
             <div className="weather_info">
               <div className="left_side">
                 <div className="last_5_days">
