@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './Weather.css';
 import Rain from '../../assets/rain.jpg';
-// import Rain1 from '../../assets/rain1.jpg';
+import Rain1 from '../../assets/rain1.jpg';
+
 import Sunny from '../../assets/sunny.jpg';
 import Thunderstorm from '../../assets/thunderstorm.jpg';
 import Cloudy from '../../assets/cloudy.jpg';
@@ -22,7 +23,7 @@ function Weather() {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
   const [searchClicked, setSearchClicked] = useState(false);
-  const [error, setError] = useState(null); // New state for error handling
+  const [error, setError] = useState(null);
   const apikey = "65f7b612e3b7902c807bca207f229519";
 
   const fetchWeather = async () => {
@@ -67,14 +68,23 @@ function Weather() {
 
   const getFiveDayForecast = () => {
     if (!weather) return [];
-    return weather.list.slice(1).filter((_, index) => index % 8 === 0).slice(0, 5).map((forecast, index) => {
+    const currentDate = new Date().getDate();
+    const forecastData = weather.list.filter(forecast => {
+      const forecastDate = new Date(forecast.dt * 1000).getDate();
+      return forecastDate !== currentDate;
+    });
+
+    const dailyForecast = [];
+    for (let i = 0; i < forecastData.length; i += 8) {
+      const forecast = forecastData[i];
       const date = new Date(forecast.dt * 1000);
       const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
       const temperature = forecast.main.temp.toFixed(2);
       const weatherType = forecast.weather[0].main;
       const Icon = getWeatherIcon(weatherType);
-      return { dayName, temperature, Icon };
-    });
+      dailyForecast.push({ dayName, temperature, Icon });
+    }
+    return dailyForecast.slice(0, 5); // Get only the next 5 days
   };
 
   const getWeatherIcon = (weatherType) => {
@@ -95,7 +105,7 @@ function Weather() {
     switch (weatherType) {
       case 'Clear': return Sunny;
       case 'Clouds': return Cloudy;
-      case 'Rain': return Rain;
+      case 'Rain': return Rain1;
       case 'Thunderstorm': return Thunderstorm;
       case 'Snow': return Cold;
       case 'Haze': return Haze;
@@ -106,7 +116,7 @@ function Weather() {
   const currentWeatherData = getCurrentWeatherData();
   const fiveDayForecast = getFiveDayForecast();
   const WeatherIcon = getWeatherIcon(currentWeatherData.weather);
-  const image = getBackgroundImage(currentWeatherData.weather)
+  const image = getBackgroundImage(currentWeatherData.weather);
 
   return (
     <div className='weather_container' style={{ backgroundImage: `url(${image})` }}>
@@ -125,7 +135,7 @@ function Weather() {
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
               />
-              <BiSearch onClick={() => { fetchWeather(); }} />
+              <BiSearch onClick={fetchWeather} />
             </div>
             <div className="location_geotagging">
               <CiLocationOn className='fa_location' />
@@ -135,7 +145,7 @@ function Weather() {
 
           {loading && <p className='loading'>Loading...</p>}
 
-          {error && <div className='error'>{error}</div>} {/* Error message div */}
+          {error && <div className='error'>{error}</div>}
 
           {weather && !loading && !error && (
             <div className="weather_info">
