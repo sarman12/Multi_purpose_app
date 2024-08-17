@@ -10,7 +10,7 @@ body {
 }
 
 .calculator_container {
-        background-image: linear-gradient(to right, rgb(6, 47, 83), rgb(4, 54, 31));
+        background-image: linear-gradient(to right, rgb(4, 23, 39), rgb(1, 29, 18));
     margin-top: 15vh;
     width: 100vw;
     height: 85vh;
@@ -29,7 +29,7 @@ body {
     width: 37%;
     height: 70vh;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    background-color: rgba(13, 27, 39, 0.6);
+    background-color: rgba(1, 6, 10, 0.9);
     backdrop-filter: blur(8px);
     padding: 20px;
     transition: all 0.3s ease;
@@ -93,9 +93,6 @@ body {
 }
 
 .row2 div {
-        /* border: 2px red solid; */
-    /* display: grid;
-    grid-template-columns: repeat(4, 1fr); */
     display: flex;
     justify-content: space-between;
     gap: 1rem;
@@ -104,7 +101,8 @@ body {
 .btn,
 .row3 button {
     border-radius: 0.5rem;
-    width: 22%;
+    width: 100px;
+    height: 60px;
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.1);
     color: aliceblue;
@@ -119,10 +117,10 @@ body {
 .btn:hover,
 .row1 input:hover,
 .row3 button:hover {
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
     background: rgba(140, 139, 142, 0.5);
     color: rgb(255, 255, 255);
-    /* transform: scale(1.05); */
+    transform: scale(1.1);
 }
 
 @media screen and (max-width: 1000px) {

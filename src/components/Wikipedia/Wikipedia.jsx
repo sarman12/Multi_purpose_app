@@ -5,7 +5,7 @@ import { BiSearch } from 'react-icons/bi';
 function Wikipedia() {
     const [mode, setMode] = useState(false);
     const [successful, setSuccessful] = useState(false);
-    const [error, setError] = useState(false);
+    // const [error, setError] = useState(false);
     const [searchValue, setSearchValue] = useState("");
     const [results, setResults] = useState([]);
 
@@ -17,15 +17,15 @@ function Wikipedia() {
                 console.log(data);
                 setResults(data.query.search);
                 setSuccessful(true);
-                setError(false);
+                // setError(false);
             } else {
                 console.log("Page not found");
-                setError(true);
+                // setError(true);
                 setSuccessful(false);
             }
         } catch {
             console.log("Error fetching data");
-            setError(true);
+            // setError(true);
             setSuccessful(false);
         }
     }
@@ -52,7 +52,7 @@ function Wikipedia() {
                     </div>
 
                     <div className={`wikipedia_search_result ${successful ? '' : 'wikipedia_search_result_notvisible'}`}>
-                        {error && <div className="error">Page not found or an error occurred.</div>}
+                        {/* {error && <div className="error">Page not found or an error occurred.</div>} */}
                         {results.map((result, index) => (
                             <div key={index} className="results">
                                 <h3>{result.title}</h3>

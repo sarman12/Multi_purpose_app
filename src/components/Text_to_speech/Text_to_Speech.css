@@ -12,8 +12,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: linear-gradient(135deg, rgb(7, 214, 237), rgb(218, 4, 125));
-    background-repeat: no-repeat;
+        background-image: linear-gradient(to right, rgb(6, 47, 83), rgb(4, 54, 31));    background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     transition: all 0.7s ease;
@@ -25,7 +24,7 @@
     font-weight: 500;
     margin-top: -50px;
     margin-bottom: 50px;
-    color: #ff2963;
+    color: #ea4c73;
 }
 
 .tts_container h1 span {
@@ -38,8 +37,8 @@ textarea {
     width: 600px;
     height: 250px;
     border-radius: 10px;
-    background-color: #403d84;
-    color: #fff;
+    background-color: #fcfcfc;
+    color: #010101;
     font-size: 20px;
     border: 0;
     outline: 0;
@@ -50,7 +49,7 @@ textarea {
 
 textarea::placeholder {
     font-size: 20px;
-    color: #ddd;
+    color: #000000;
 }
 
 .row {
@@ -61,25 +60,34 @@ textarea::placeholder {
 }
 
 button {
-    background-color: #ff2963;
+    background-color: #000000;
     color: white;
     font-size: 16px;
     padding: 10px 30px;
-    border-radius: 35px;
+    border-radius: 5px;
     outline: 0;
+        height: 50px;
     cursor: pointer;
+    font-weight: 600;
+    transition: all 0.5s ease;
+}
+button:hover{
+    color: #000000;
+    font-weight: 600;
+    background-color: white;
 }
 
 select {
+    font-weight: 600;
     flex: 1;
-    color: white;
-    background: #403d84;
+    color: #000000;
+    background: #fafafb;
     padding: 0 20px;
     outline: 0;
     border: 0;
     height: 50px;
     width: 470px;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 @media screen and (max-width: 700px) {
@@ -110,7 +118,7 @@ select {
     button {
         background-color: #ff2963;
         color: white;
-        border: 1px red solid;
+        border: 1px rgb(243, 238, 238) solid;
         font-size: 14px;
         padding: 10px 20px;
     }

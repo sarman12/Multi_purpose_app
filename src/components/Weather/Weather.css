@@ -36,6 +36,7 @@
     flex-direction: column;
     justify-content: space-between;
         transition: all 0.7s ease;
+        backdrop-filter: blur(10px);
 }
 
 .weather_navbar {
@@ -146,11 +147,12 @@
 }
 
 .attribute:hover {
-    background-color: #bae7ff;
+    background-color: #cfe5f1;
     transform: scale(1.05);
 }
 
 .attribute .fa {
+    color: black;
     font-size: 3.2rem;
 }
 
