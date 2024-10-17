@@ -17,6 +17,8 @@ import { LuHaze } from 'react-icons/lu';
 import { CiLocationOn } from 'react-icons/ci';
 import { BsSnow } from 'react-icons/bs';
 import { GiFog } from 'react-icons/gi';
+import dotenv from 'dotenv';
+dotenv.config();
 
 function Weather() {
   const [city, setCity] = useState("");
@@ -24,7 +26,7 @@ function Weather() {
   const [loading, setLoading] = useState(false);
   const [searchClicked, setSearchClicked] = useState(false);
   const [error, setError] = useState(null);
-  const apikey = "65f7b612e3b7902c807bca207f229519";
+  const apikey = process.env.apikey;
 
   const fetchWeather = async () => {
     if (!city) {
@@ -84,7 +86,7 @@ function Weather() {
       const Icon = getWeatherIcon(weatherType);
       dailyForecast.push({ dayName, temperature, Icon });
     }
-    return dailyForecast.slice(0, 5); // Get only the next 5 days
+    return dailyForecast.slice(0, 5);
   };
 
   const getWeatherIcon = (weatherType) => {
@@ -151,7 +153,7 @@ function Weather() {
             <div className="weather_info">
               <div className="left_side">
                 <div className="last_5_days">
-                  <p>Next 5 Days Weather</p>
+                  <p>Next 5 days Weather</p>
                   <div className="days">
                     {fiveDayForecast.map((forecast, index) => (
                       <div className="day" key={index}>
